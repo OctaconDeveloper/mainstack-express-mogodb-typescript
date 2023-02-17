@@ -5,9 +5,11 @@ export interface IProduct extends Document{
     uuid: String,
     sku: String,
     price: Number,
-    currency: String,
+    currency?: String,
     quantity: Number,
     availability: Boolean,
-    description: Text,
+    description: String,
     file: String,
+    updatedAt: Date,
+    createdAt: Date,
 } 

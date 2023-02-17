@@ -1,4 +1,4 @@
-import { Logger } from '../utils/logger.util';
+import { Logger } from '../../utils/logger.util';
 import { IResponse } from '../contracts/response.contract';
 import { Request, Response, NextFunction } from 'express';
  

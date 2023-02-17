@@ -1,11 +1,9 @@
-import * as mongoose from 'mongoose';
-import {UUID} from 'uuid-generator-ts';
-import { IProduct } from '../contracts/product.contract';
+import {model, Model, Schema} from 'mongoose';
+import { v4 as uuid } from 'uuid';
+import { IProduct } from '../app/contracts/product.contract';
 
-const uuid = new UUID();
-// const Schema = mongoose.Schema;
 
-const ProductSchema : mongoose.Schema = new mongoose.Schema({
+const ProductSchema = new Schema<IProduct>({
     name: {
         type: String,
         unique: true,
@@ -17,11 +15,11 @@ const ProductSchema : mongoose.Schema = new mongoose.Schema({
     },
     sku: {
         type: String,
-        required: 'Enter product store keeping unit'
+        required: true,
     },
     price: {
         type: Number ,          
-        required: 'Enter product price'           
+        required: true,          
     },
     currency: {
         type: String,
@@ -29,36 +27,38 @@ const ProductSchema : mongoose.Schema = new mongoose.Schema({
     },
     quantity: {
         type: Number ,          
-        required: 'Enter product quantity available'           
+        required: true,          
     },
     availability: {
         type: Boolean,
         default: true         
     },
     description: {
-        type: Text,          
-        required: 'Enter product description' 
+        type: String,          
+        required: true,
     },
     file: {
         type: String,          
-        required: 'Enter product image' 
+        required: true, 
     },
-    updated_at: {
+    updatedAt: {
         type: Date,
         default: Date.now
     },
-    created_at: {
+    createdAt: {
         type: Date,
         default: Date.now
     }
-});
+}, { versionKey: false });
 ProductSchema.pre('save', function (next) {
     if(!this.isModified('uuid')){
         return next();
     }
 
-    this.uuid = uuid.toString()
+    this.uuid = uuid()
 
     next();
 });
-export default mongoose.model<IProduct>('Product', ProductSchema)
+
+
+export const ProductModel: Model<IProduct> =  model('Product', ProductSchema)

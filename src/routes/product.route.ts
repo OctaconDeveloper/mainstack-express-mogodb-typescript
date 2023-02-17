@@ -1,4 +1,7 @@
-import ProductController from "../controllers/product.controller";
+import * as multer from "multer";
+import ProductController from "../app/controllers/product.controller";
+
+const upload = multer({dest: 'public/product_avatars/'})
 
 export default class ProductRoutes {  
     private readonly productController: ProductController;
@@ -8,7 +11,7 @@ export default class ProductRoutes {
     }
     
     public routes(app): void {    
-        app.route('/products').post(this.productController.addNewProduct)
+        app.route('/products').post(upload.single('file'), this.productController.addNewProduct)
         app.route('/products').get(this.productController.getAllProducts)
         app.route('/products/:productUuid').get(this.productController.getSingleProduct)
         app.route('/products/:productUuid').patch(this.productController.updateProduct)

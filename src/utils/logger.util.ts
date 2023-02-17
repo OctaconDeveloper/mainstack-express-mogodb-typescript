@@ -1,4 +1,4 @@
-import { ILogger } from "contracts/logger.contract";
+import { ILogger } from "app/contracts/logger.contract";
 import { APP_NAME } from "./config.utils";
 
 export class Logger implements ILogger {

@@ -143,7 +143,7 @@ export default class ProductService {
 
 
     private processFile(name, file) {
-        const fileName = `${name}-product.${file.originalname.split('.').pop()}`;
+        const fileName = `${name.replace(" ","-")}-product.${file.originalname.split('.').pop()}`;
         const destination = file.destination;
         const oldFilePath = destination + file.filename
         const newFilePath = destination + fileName

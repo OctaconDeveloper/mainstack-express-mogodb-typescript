@@ -10,7 +10,7 @@ export class ApiRoutes {
         app.route('/')
         .get((req: Request, res: Response) => {            
             res.status(200).send({
-                message: 'GET request successfulll!!!!'
+                message: 'Welcome to my API'
             })
         })    
         
